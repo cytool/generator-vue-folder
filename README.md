@@ -4,6 +4,10 @@
 
 vue项目的目录结构为`src/views`, 因此生成后的文件夹为`src/views/[pageFolder]`, 最终生成`./src/views/[pageFolder]/index.vue + index.styl`
 
+### 下载
+
+[https://github.com/cytool/generator-vue-folder/releases](https://github.com/cytool/generator-vue-folder/releases)
+
 ### 安装
 
 切换到扩展（extensions, 快捷键ctrl + shift + x） => 插件窗口右上角 ... => 从VSIX安装（install from VSIX）
@@ -19,11 +23,7 @@ vue项目的目录结构为`src/views`, 因此生成后的文件夹为`src/views
 在 .vue 页面中输入 `vt` tab键后，即可生成vue模板文件内容
 
 
-
-
-### 教程 - 创建vscode插件
-
-[VSCode插件开发](https://juejin.cn/post/6884964643400318983)
+教程 => [VSCode插件开发](https://juejin.cn/post/6884964643400318983)
 
 
 publisher code => `m75pghitoue7b7tkcmdj5hq7ebqmok3igtlidqdihsk2ofr23x6q`
