@@ -1,0 +1,12 @@
+{
+    "vue_template": {
+        "scope": "vue",
+        "prefix": "vt",
+        "body": [
+            "<template lang='pug'>\r\r#${1:pageName}\r    p.txt 这里是About页面\r\r</template>",
+            "<script>\r\rexport default {\r    name: '${2:pageName}',\r\r    data() {\r        return {}\r    },\r    methods() {},\r}\r\r</script>",
+            "<style lang='stylus' src='./index.styl'></style>\r"
+        ],
+        "description": "生成VUE页面结构"
+    }
+}
