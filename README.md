@@ -27,3 +27,10 @@ vue项目的目录结构为`src/views`, 因此生成后的文件夹为`src/views
 
 
 publisher code => `m75pghitoue7b7tkcmdj5hq7ebqmok3igtlidqdihsk2ofr23x6q`
+
+打包命令 => `vsce package`
+
+
+
+### todo
+- [ ] 自动创建router关联
