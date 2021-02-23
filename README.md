@@ -1,5 +1,7 @@
 ## 自动生成vue页面目录
 
+![](https://img.shields.io/badge/version-0.0.2-brightgreen) 
+
 基于vue的标准页面组织方式为 ./src/views/[pageFolder]/index.vue + index.styl。 因此此插件是为了解决新建一个页面需要手动创建对应页面文件夹及文件及初始化文件内容而开发的插件。
 
 vue项目的目录结构为`src/views`, 因此生成后的文件夹为`src/views/[pageFolder]`, 最终生成`./src/views/[pageFolder]/index.vue + index.styl`
