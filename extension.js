@@ -43,8 +43,8 @@ function activate(context) {
 
         const folderPath = vscode.Uri.file(viewsPath + userInputValue)
         vscode.workspace.fs.createDirectory(folderPath)
-        vscode.workspace.fs.writeFile(vscode.Uri.file(viewsPath + userInputValue + '/index.vue'), new Uint8Array(Buffer.from(pug)))
-        vscode.workspace.fs.writeFile(vscode.Uri.file(viewsPath + userInputValue + '/index.styl'), new Uint8Array(Buffer.from(styl)))
+        vscode.workspace.fs.writeFile(vscode.Uri.file(viewsPath + userInputValue + '/index.vue'), new Uint8Array(Buffer.from(pug(userInputValue))))
+        vscode.workspace.fs.writeFile(vscode.Uri.file(viewsPath + userInputValue + '/index.styl'), new Uint8Array(Buffer.from(styl(userInputValue))))
         // vscode.window.showInformationMessage('页面创建成功！')
     })
 

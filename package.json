@@ -20,6 +20,10 @@
 			{
 				"command": "generator-vue-folder.vue",
 				"title": "CYTOOL - 快速生成VUE页面目录"
+			},
+			{
+				"command": "generator-vue-folder.vue",
+				"title": "CYTOOL - 快速生成VUE组件目录"
 			}
 		],
 		"menus": {

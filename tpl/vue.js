@@ -1,11 +1,11 @@
-const pug = `
+const pug = (folderName) => `
 <template lang='pug'>
-#pageName
-    p.txt 这里是About页面
+#${folderName}
+    p.txt 这里是${folderName}页面
 </template>
 <script>
 export default {
-    name: 'pageName',
+    name: '${folderName}',
 
     data() {
         return {}
@@ -16,7 +16,7 @@ export default {
 <style lang='stylus' src='./index.styl'></style>
 `
 
-const styl = `#pageName`
+const styl = (folderName) => `#${folderName}`
 
 module.exports = {
     pug, styl
