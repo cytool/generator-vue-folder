@@ -35,7 +35,7 @@ function activate(context) {
         if (userInputValue === undefined || userInputValue === '') {
             return
         }
-        if (/^(\d|\.){1,}/igu.test(userInputValue)) {
+        if (/^(\d|\.|[\u4e00-\u9fa5]|[A-Z]){1,}/gu.test(userInputValue)) {
             return vscode.window.showErrorMessage('文件夹名称不能以数字或者.开头！')
         }
 
