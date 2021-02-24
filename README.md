@@ -34,5 +34,13 @@ publisher code => `m75pghitoue7b7tkcmdj5hq7ebqmok3igtlidqdihsk2ofr23x6q`
 
 
 
-### todo
-- [ ] 自动创建router关联
+
+
+### AST处理
+[注入import](https://github.com/axuebin/babel-inject-dep-demo)
+[babel 修改抽象语法树——入门与实践](https://www.jianshu.com/p/3c495dcbed49)
+
+
+### bug
+
+- 修改router后不符合eslint规则

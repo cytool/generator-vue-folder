@@ -2,6 +2,9 @@
 // Import the module and reference it with the alias vscode in your code below
 const vscode = require('vscode')
 const { pug, styl } = require('./tpl/vue')
+const { transform, types } = require("@babel/core")
+const fs = require('fs-extra')
+
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
@@ -22,6 +25,7 @@ function activate(context) {
         // The code you place here will be executed every time your command is executed
 
         const viewsPath = e.path.match(/.*src/)[0] + '/views/'
+        const routerFilePath = e.path.match(/.*src/)[0] + '/router/index.js'
         let userInputValue = await vscode.window.showInputBox({
             ignoreFocusOut: true,
             password: false,
@@ -45,6 +49,54 @@ function activate(context) {
         vscode.workspace.fs.createDirectory(folderPath)
         vscode.workspace.fs.writeFile(vscode.Uri.file(viewsPath + userInputValue + '/index.vue'), new Uint8Array(Buffer.from(pug(userInputValue))))
         vscode.workspace.fs.writeFile(vscode.Uri.file(viewsPath + userInputValue + '/index.styl'), new Uint8Array(Buffer.from(styl(userInputValue))))
+
+
+        // 注入到router.js
+        const NAME = userInputValue.replace(/\w/, m => m.toLocaleUpperCase())
+
+
+        const route = fs.readFileSync(routerFilePath).toString()
+
+        // 定义一个 babel 插件，拦截并修改 routes 的数组表达式
+        const visitor = {
+            // 注入 import XXX from 'XXX'
+            Program(path) {
+                const bodyPath = path.get('body');
+                const hasImport = bodyPath.some(nodePath => {
+                    // 判断是否有 import Xxx from 'xxx' 语句
+                    if (nodePath.isImportDeclaration()) {
+                        return nodePath.get('source').isStringLiteral() && nodePath.get('source').node.value === NAME
+                    }
+                })
+
+                if (!hasImport) {
+                    const importDefaultSpecifier = [types.ImportDefaultSpecifier(types.Identifier(NAME))]
+                    const importDeclaration = types.ImportDeclaration(importDefaultSpecifier, types.StringLiteral('../views/' + userInputValue + '/index.vue'))
+                    path.get('body')[0].insertBefore(importDeclaration)
+                }
+            },
+
+            // routes注入新页面
+            ArrayExpression(path) {
+                const elements = path.node.elements
+                // 新增一个构建出来的 route 对象
+                elements.push(types.objectExpression([
+                    types.objectProperty(types.identifier('path'), types.stringLiteral('/' + userInputValue)),
+                    types.objectProperty(types.identifier('name'), types.stringLiteral(NAME)),
+                    types.objectProperty(types.identifier('component'), types.identifier(NAME))
+                ]))
+            }
+        }
+        // 通过 plugin 转换源代码 parse 出来的AST 抽象语法树，并且返回结果
+        let result = transform(route, {
+            plugins: [
+                { visitor }
+            ]
+        });
+        // 重新写入文件
+        fs.writeFileSync(routerFilePath, result.code)
+
+
         // vscode.window.showInformationMessage('页面创建成功！')
     })
 
