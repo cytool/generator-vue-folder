@@ -2,7 +2,7 @@
 	"name": "generator-vue-folder",
 	"displayName": "generator-vue-folder",
 	"description": "快速生成vue页面目录",
-	"version": "0.0.2",
+	"version": "0.0.3",
 	"publisher": "wulala",
 	"repository": "https://github.com/cytool/generator-vue-folder",
 	"engines": {
@@ -30,7 +30,7 @@
 			"explorer/context": [
 				{
 					"command": "generator-vue-folder.vue",
-					"when": "explorerResourceIsFolder && resourcePath =~ /./src/"
+					"when": "explorerResourceIsFolder && resourcePath =~ ./src/"
 				}
 			]
 		},
