@@ -3,7 +3,6 @@
 const vscode = require('vscode')
 const { pug, styl } = require('./tpl/vue')
 const { transform, types } = require("@babel/core")
-const fs = require('fs-extra')
 
 
 // this method is called when your extension is activated
@@ -53,10 +52,8 @@ function activate(context) {
 
         // 注入到router.js
         const NAME = userInputValue.replace(/\w/, m => m.toLocaleUpperCase())
-
-
-        const route = fs.readFileSync(routerFilePath).toString()
-
+        const route = (await vscode.workspace.fs.readFile(vscode.Uri.file(routerFilePath))).toString()
+        // const route = fs.readFileSync(routerFilePath).toString()
         // 定义一个 babel 插件，拦截并修改 routes 的数组表达式
         const visitor = {
             // 注入 import XXX from 'XXX'
@@ -70,7 +67,9 @@ function activate(context) {
                 })
 
                 if (!hasImport) {
+                    // @ts-ignore
                     const importDefaultSpecifier = [types.ImportDefaultSpecifier(types.Identifier(NAME))]
+                    // @ts-ignore
                     const importDeclaration = types.ImportDeclaration(importDefaultSpecifier, types.StringLiteral('../views/' + userInputValue + '/index.vue'))
                     path.get('body')[0].insertBefore(importDeclaration)
                 }
@@ -94,9 +93,8 @@ function activate(context) {
             ]
         });
         // 重新写入文件
-        fs.writeFileSync(routerFilePath, result.code)
-
-
+        vscode.workspace.fs.writeFile(vscode.Uri.file(routerFilePath), new Uint8Array(Buffer.from(result.code)))
+        // fs.writeFileSync(routerFilePath, result.code)
         // vscode.window.showInformationMessage('页面创建成功！')
     })
 
