@@ -16,7 +16,8 @@ export default {
 <style lang='stylus' src='./index.styl'></style>
 `
 
-const styl = (folderName) => `#${folderName}`
+const styl = (folderName) => `#${folderName}
+    box-sizing border-box`
 
 module.exports = {
     pug, styl

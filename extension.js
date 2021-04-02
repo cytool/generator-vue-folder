@@ -92,10 +92,17 @@ function activate(context) {
                 { visitor }
             ]
         });
+
         // 重新写入文件
         vscode.workspace.fs.writeFile(vscode.Uri.file(routerFilePath), new Uint8Array(Buffer.from(result.code)))
         // fs.writeFileSync(routerFilePath, result.code)
         // vscode.window.showInformationMessage('页面创建成功！')
+
+        // 如果没有eslint, 则没有效果
+        vscode.window.createTerminal().sendText(`eslint ${routerFilePath} --fix`)
+
+        // 运行 eslint
+        // eslint routerFilePath --fix
     })
 
     context.subscriptions.push(disposable)
