@@ -9,7 +9,7 @@
 -------
 ### 安装
 
-1. [下载插件文件 generator-vue-folder-0.0.?.visx](https://github.com/cytool/generator-vue-folder/releases)
+1. [下载最新版插件generator-vue-folder-0.0.?.visx](https://github.com/cytool/generator-vue-folder/releases/latest)
 
 2. 安装: 切换到扩展（extensions, 快捷键ctrl + shift + x） => 扩展窗口右上角 ... => 从VSIX安装（install from VSIX）
 
