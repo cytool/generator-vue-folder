@@ -98,8 +98,10 @@ function activate(context) {
         // fs.writeFileSync(routerFilePath, result.code)
         // vscode.window.showInformationMessage('页面创建成功！')
 
-        // 如果没有eslint, 则没有效果
-        vscode.window.createTerminal().sendText(`eslint ${routerFilePath} --fix`)
+
+        // vscode.window.createTerminal().sendText(`eslint ${routerFilePath} --fix`) // 全局eslint
+        vscode.window.createTerminal().sendText(`./node_modules/.bin/eslint ${routerFilePath} --fix`) // 项目内eslint
+
 
         // 运行 eslint
         // eslint routerFilePath --fix
